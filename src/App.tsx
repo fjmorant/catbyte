@@ -2,6 +2,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import { Provider } from 'react-redux';
+import { NewUser } from './screens/new-user';
 import { UserDetail } from './screens/user-detail';
 
 import { UsersScreen } from './screens/users';
@@ -23,6 +24,11 @@ const App = () => {
             name="user-detail"
             component={UserDetail}
             options={{ title: 'User' }}
+          />
+          <Stack.Screen
+            name="new-user"
+            component={NewUser}
+            options={{ title: 'New User' }}
           />
         </Stack.Navigator>
       </NavigationContainer>

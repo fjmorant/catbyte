@@ -1,5 +1,13 @@
 import React, { useEffect } from 'react';
-import { FlatList, SafeAreaView, StatusBar, StyleSheet } from 'react-native';
+import {
+  FlatList,
+  Pressable,
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import { UserItem } from '../../components/user-item';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setUsers } from '../../reducers';
@@ -54,14 +62,36 @@ export const UsersScreen = ({ navigation }: any) => {
     />
   );
 
+  console.log('users[0', users[0]);
+
   return (
     <SafeAreaView style={styles.container}>
-      <FlatList
-        data={users}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-        numColumns={2}
-      />
+      <View>
+        <FlatList
+          data={users}
+          renderItem={renderItem}
+          keyExtractor={item => item.id}
+          numColumns={2}
+        />
+        <Pressable
+          style={{
+            position: 'absolute',
+            bottom: 5,
+            right: 5,
+            backgroundColor: 'blue',
+            borderRadius: 100,
+            padding: 5,
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: 70,
+            width: 70,
+          }}
+          onPress={() => {
+            navigation.navigate('new-user');
+          }}>
+          <Text style={{ fontSize: 45, color: 'white' }}>+</Text>
+        </Pressable>
+      </View>
     </SafeAreaView>
   );
 };
