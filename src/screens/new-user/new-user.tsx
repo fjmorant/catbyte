@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
 export const NewUser = ({ navigation }: any) => {
   const [firstName, setFirstname] = useState('');
   const [lastName, setLastname] = useState('');
-  const [image, setImage] = useState('https://reactjs.org/logo-og.png');
+  const [image, setImage] = useState('');
   const [age, setAge] = useState('');
   const dispatch = useAppDispatch();
 
