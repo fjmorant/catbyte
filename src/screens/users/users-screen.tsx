@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import {
   Button,
   FlatList,
@@ -7,6 +7,8 @@ import {
   StyleSheet,
 } from 'react-native';
 import { UserItem } from '../../components/user-item';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { setUsers } from '../../reducers';
 
 const styles = StyleSheet.create({
   container: {
@@ -26,7 +28,8 @@ const styles = StyleSheet.create({
 });
 
 export const UsersScreen = ({ navigation }: any) => {
-  const [users, setUsers] = useState([]);
+  const users = useAppSelector(state => state.usersState.users);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     fetch('https://dummyjson.com/users', {
@@ -38,12 +41,14 @@ export const UsersScreen = ({ navigation }: any) => {
     })
       .then(response => response.json())
       .then(json => {
-        setUsers(json.users);
+        dispatch(setUsers(json.users));
       })
       .catch(error => {
         console.error(error);
       });
-  }, []);
+  }, [dispatch]);
+
+  console.log('users => ', users);
 
   const renderItem = ({ item }: any) => (
     <UserItem
