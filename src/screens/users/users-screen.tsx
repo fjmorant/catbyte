@@ -1,11 +1,5 @@
 import React, { useEffect } from 'react';
-import {
-  Button,
-  FlatList,
-  SafeAreaView,
-  StatusBar,
-  StyleSheet,
-} from 'react-native';
+import { FlatList, SafeAreaView, StatusBar, StyleSheet } from 'react-native';
 import { UserItem } from '../../components/user-item';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setUsers } from '../../reducers';
@@ -48,23 +42,20 @@ export const UsersScreen = ({ navigation }: any) => {
       });
   }, [dispatch]);
 
-  console.log('users => ', users);
-
   const renderItem = ({ item }: any) => (
     <UserItem
       key={item.id}
       imageUrl={item.image}
       age={item.age}
       name={item.lastName}
+      onUserPress={() => {
+        navigation.navigate('user-detail', { userId: item.id });
+      }}
     />
   );
 
   return (
     <SafeAreaView style={styles.container}>
-      <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('user-detail')}
-      />
       <FlatList
         data={users}
         renderItem={renderItem}

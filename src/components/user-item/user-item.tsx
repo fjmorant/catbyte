@@ -1,5 +1,11 @@
 import React from 'react';
-import { ImageBackground, StyleSheet, Text, View } from 'react-native';
+import {
+  ImageBackground,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -21,25 +27,28 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginHorizontal: 3,
   },
+  subContainer: { flexDirection: 'row', backgroundColor: 'white' },
 });
 
 export const UserItem = ({
   imageUrl,
   name,
   age,
+  onUserPress,
 }: {
   imageUrl: string;
   name: string;
   age: number;
+  onUserPress: () => void;
 }) => {
   return (
-    <View style={styles.container}>
+    <Pressable style={styles.container} onPress={onUserPress}>
       <ImageBackground source={{ uri: imageUrl }} style={styles.image}>
-        <View style={{ flexDirection: 'row', backgroundColor: 'white' }}>
+        <View style={styles.subContainer}>
           <Text style={styles.text}>{name}</Text>
           <Text style={styles.text}>{age}</Text>
         </View>
       </ImageBackground>
-    </View>
+    </Pressable>
   );
 };
